@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T-Minus Countdown Lock Screen Studio — 2026 4K Elite Edition</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #05070c;
+      color: #f3f4f6;
+    }
+    .font-display { font-family: 'Space Grotesk', sans-serif; }
+    .font-serif-editorial { font-family: 'Playfair Display', Georgia, serif; }
+    .font-mono-tech { font-family: 'JetBrains Mono', monospace; }
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-runnable-track {
+      height: 6px;
+      border-radius: 999px;
+      background: #1e293b;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      margin-top: -6px;
+      background: linear-gradient(135deg, #38bdf8, #f59e0b);
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      border: 2px solid #05070c;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.75);
+      transition: transform 0.15s ease;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.18);
+    }
+    .studio-grid {
+      background-color: #05070c;
+      background-image:
+        radial-gradient(circle at 50% 42%, rgba(56, 189, 248, 0.07), transparent 60%),
+        radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+      background-size: 100% 100%, 24px 24px;
+    }
+    #stageContainer { perspective: 1400px; }
+    #canvasFrame {
+      transform-style: preserve-3d;
+      transition: transform 0.14s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+      will-change: transform;
+    }
+    #specularGlare {
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.16), transparent 65%);
+      mix-blend-mode: overlay;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col lg:flex-row overflow-x-hidden selection:bg-cyan-500/30">
+
+  <!-- LEFT CONTROL PANEL -->
+  <aside class="w-full lg:w-[470px] xl:w-[510px] bg-[#090d16]/95 backdrop-blur-xl border-b lg:border-b-0 lg:border-r border-slate-800/80 p-5 sm:p-6 flex flex-col gap-4 lg:h-screen lg:overflow-y-auto shrink-0 z-10">
+    
+    <!-- Header -->
+    <div class="flex items-start justify-between gap-3">
+      <div>
+        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-gradient-to-r from-cyan-500/15 to-amber-500/15 border border-cyan-400/25 text-cyan-300 text-[11px] font-bold tracking-wider mb-2">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+          4K ELITE HUD &amp; GEMINI 3D ENGINE
+        </div>
+        <h1 class="font-display text-xl sm:text-2xl font-extrabold tracking-tight text-white">Hero T-Minus HUD Studio</h1>
+        <p class="text-xs text-slate-400 mt-0.5">Cinematic 4K lock screens with mathematical safe-zone verification.</p>
+      </div>
+    </div>
+
+    <!-- 1. Goal, Emotional Stakes & Tone -->
+    <section class="bg-slate-900/75 border border-slate-800/80 rounded-2xl p-4 space-y-3">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">1. Goal &amp; Emotional Stakes</span>
+        <span class="text-[11px] text-cyan-400 font-medium">Human Anchor</span>
+      </div>
+
+      <!-- Preset Pills -->
+      <div class="flex flex-wrap gap-1.5" id="presetBar">
+        <button type="button" data-preset="challenge"
+          class="preset-btn px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-cyan-500/20 border border-cyan-500/50 text-cyan-200 transition">
+          🏆 Nov 23 Challenge
+        </button>
+        <button type="button" data-preset="exam"
+          class="preset-btn px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-950 border border-slate-800 text-slate-400 hover:text-slate-200 transition">
+          🎓 Final Exam
+        </button>
+        <button type="button" data-preset="launch"
+          class="preset-btn px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-950 border border-slate-800 text-slate-400 hover:text-slate-200 transition">
+          🚀 Ship Product
+        </button>
+        <button type="button" data-preset="portfolio"
+          class="preset-btn px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-950 border border-slate-800 text-slate-400 hover:text-slate-200 transition">
+          💼 Dream Offer
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+        <div class="sm:col-span-2">
+          <label for="goalInput" class="block text-xs font-medium text-slate-300 mb-1">Target Mission</label>
+          <input id="goalInput" type="text" maxlength="30" value="Win $1,000 AI Challenge"
+            class="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition" />
+        </div>
+        <div>
+          <label for="dateInput" class="block text-xs font-medium text-slate-300 mb-1">Deadline</label>
+          <input id="dateInput" type="text" maxlength="12" value="NOV 23"
+            class="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-white uppercase placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition" />
+        </div>
+      </div>
+
+      <!-- Why This Matters (Stakes) -->
+      <div>
+        <label for="stakesInput" class="block text-xs font-medium text-slate-300 mb-1">Why This Matters (Your Real Stakes)</label>
+        <input id="stakesInput" type="text" maxlength="54" value="Prove I can ship real AI products & win $1,000."
+          class="w-full bg-slate-950 border border-cyan-500/40 rounded-xl px-3 py-2 text-xs text-cyan-100 placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition" />
+      </div>
+
+      <!-- Emotional Tone Selector -->
+      <div>
+        <span class="block text-[11px] font-medium text-slate-400 mb-1.5">Protagonist Voice</span>
+        <div class="grid grid-cols-3 gap-1.5" id="toneSelector">
+          <button type="button" data-tone="stoic"
+            class="tone-btn py-1.5 px-2 rounded-lg border text-[11px] font-bold transition bg-cyan-500/20 border-cyan-500 text-cyan-200">
+            ⚡ Tactical AI
+          </button>
+          <button type="button" data-tone="warm"
+            class="tone-btn py-1.5 px-2 rounded-lg border text-[11px] font-bold transition bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200">
+            🎬 Origin Arc
+          </button>
+          <button type="button" data-tone="zerofluff"
+            class="tone-btn py-1.5 px-2 rounded-lg border text-[11px] font-bold transition bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200">
+            🎯 Field Directive
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Cinematic Hero Archetypes & Gemini 3D Prompt Generator -->
+    <section class="bg-slate-900/75 border border-slate-800/80 rounded-2xl p-4 space-y-3">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">2. 3D Hero Archetype &amp; Gemini Renders</span>
+        <span class="text-[11px] text-amber-400 font-semibold">AI Powered</span>
+      </div>
+      
+      <div class="grid grid-cols-2 gap-2" id="themeSelector">
+        <button type="button" data-theme="suithud"
+          class="theme-btn p-2.5 rounded-xl border text-left transition bg-cyan-500/15 border-cyan-500 text-white">
+          <div class="w-full h-2.5 rounded-sm mb-2 bg-gradient-to-r from-[#040914] via-[#38bdf8] to-[#fbbf24]"></div>
+          <div class="text-xs font-bold leading-tight">Tactical Suit HUD</div>
+          <div class="text-[10px] text-slate-400 mt-0.5">Arc-Core &amp; Reticle Rail</div>
+        </button>
+
+        <button type="button" data-theme="webslinger"
+          class="theme-btn p-2.5 rounded-xl border text-left transition bg-slate-950/70 border-slate-800 text-slate-400 hover:border-slate-700">
+          <div class="w-full h-2.5 rounded-sm mb-2 bg-gradient-to-r from-[#090d1a] via-[#ef4444] to-[#60a5fa]"></div>
+          <div class="text-xs font-bold leading-tight">Noir Web-Slinger</div>
+          <div class="text-[10px] text-slate-400 mt-0.5">Tensile Grid &amp; Rooftops</div>
+        </button>
+
+        <button type="button" data-theme="comicissue"
+          class="theme-btn p-2.5 rounded-xl border text-left transition bg-slate-950/70 border-slate-800 text-slate-400 hover:border-slate-700">
+          <div class="w-full h-2.5 rounded-sm mb-2 bg-gradient-to-r from-[#f4f1ea] via-[#dc2626] to-[#111827]"></div>
+          <div class="text-xs font-bold leading-tight">Graphic Novel Cover</div>
+          <div class="text-[10px] text-slate-400 mt-0.5">Prestige Issue #06 → #00</div>
+        </button>
+
+        <button type="button" data-theme="darkknight"
+          class="theme-btn p-2.5 rounded-xl border text-left transition bg-slate-950/70 border-slate-800 text-slate-400 hover:border-slate-700">
+          <div class="w-full h-2.5 rounded-sm mb-2 bg-gradient-to-r from-[#09090b] via-[#f59e0b] to-[#52525b]"></div>
+          <div class="text-xs font-bold leading-tight">Dark Knight Dossier</div>
+          <div class="text-[10px] text-slate-400 mt-0.5">Sonar Grid &amp; Casefile</div>
+        </button>
+      </div>
+
+      <!-- Gemini 3D Prompt Generator & Uploader Slot -->
+      <div class="space-y-2 pt-1">
+        <div class="flex items-center gap-2">
+          <label for="customHeroUpload"
+            class="flex-1 flex items-center justify-between px-3 py-2 rounded-xl bg-slate-950/90 hover:bg-slate-900 border border-dashed border-cyan-500/45 cursor-pointer transition">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="text-sm">🦸</span>
+              <span id="customHeroLabel" class="text-[11px] font-semibold text-cyan-200 truncate">Upload Gemini 3D Hero Render</span>
+            </div>
+            <span class="text-[10px] font-mono-tech uppercase px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 shrink-0">Browse</span>
+          </label>
+          <input id="customHeroUpload" type="file" accept="image/*" class="hidden" />
+
+          <button id="copyGeminiPromptBtn" type="button" title="Copy Gemini 3D Image Generation Prompt"
+            class="px-3 py-2 rounded-xl bg-slate-950 hover:bg-slate-900 border border-slate-700 text-amber-300 text-[11px] font-mono-tech font-bold flex items-center gap-1 transition shrink-0">
+            <span>✨ Copy Prompt</span>
+          </button>
+        </div>
+        <p class="text-[10px] text-slate-400 px-0.5">Tip: Click 'Copy Prompt', generate your 3D hero in Gemini, and drop the PNG right here!</p>
+      </div>
+    </section>
+
+    <!-- 3. Device Format Selector -->
+    <section class="bg-slate-900/75 border border-slate-800/80 rounded-2xl p-4 space-y-3">
+      <span class="block text-xs font-bold uppercase tracking-wider text-slate-400">3. Retina Device Format</span>
+      <div class="grid grid-cols-2 gap-2.5" id="deviceSelector">
+        <button type="button" data-device="phone"
+          class="device-btn flex flex-col items-start p-3 rounded-xl border text-left transition bg-cyan-500/15 border-cyan-500 text-white">
+          <div class="flex items-center justify-between w-full mb-1">
+            <span class="text-xs font-bold">Phone Lock Screen</span>
+            <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>
+          </div>
+          <span class="text-[11px] text-slate-300 font-mono-tech">9:19.5 • 1179×2556</span>
+        </button>
+
+        <button type="button" data-device="laptop"
+          class="device-btn flex flex-col items-start p-3 rounded-xl border text-left transition bg-slate-950/70 border-slate-800 text-slate-400 hover:border-slate-700">
+          <div class="flex items-center justify-between w-full mb-1">
+            <span class="text-xs font-bold">Laptop QHD Wallpaper</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg>
+          </div>
+          <span class="text-[11px] font-mono-tech opacity-80">16:9 • 2560×1440</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 4. Simulate Day Scrubber -->
+    <section class="bg-slate-900/75 border border-slate-800/80 rounded-2xl p-4 space-y-3">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">4. Simulate Day (T-6 → T-0)</span>
+        <span id="simBadge" class="px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 font-mono-tech text-xs font-bold">T-4 DAYS</span>
+      </div>
+      
+      <div>
+        <input id="daySlider" type="range" min="0" max="6" step="1" value="2" class="w-full" />
+        <div class="flex justify-between text-[10px] font-mono-tech text-slate-400 mt-1 px-0.5">
+          <span>T-6</span><span>T-5</span><span>T-4</span><span>T-3</span><span>T-2</span><span>T-1</span><span>T-0</span>
+        </div>
+      </div>
+
+      <div class="bg-slate-950/90 border border-slate-800 rounded-xl p-3">
+        <div class="flex items-center justify-between mb-1">
+          <span id="psychPrinciple" class="text-[10px] font-bold uppercase tracking-wider text-cyan-400">LIVE HERO HOOK</span>
+          <span id="dotsStatsLabel" class="text-[10px] font-mono-tech text-slate-400">3/7 DAYS USED</span>
+        </div>
+        <p id="psychQuotePreview" class="text-xs text-slate-200 font-medium leading-relaxed">
+          "2 days gone. 4 days left. Make today count."
+        </p>
+      </div>
+    </section>
+
+    <!-- 5. Editable T-Minus Milestones (<5 words each) -->
+    <section class="bg-slate-900/75 border border-slate-800/80 rounded-2xl p-4 space-y-2.5">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">5. T-Minus Checkpoints</span>
+        <button id="addMilestoneBtn" type="button" class="text-[11px] font-bold text-cyan-400 hover:text-cyan-300 transition">+ Add Milestone</button>
+      </div>
+      <div class="space-y-2" id="milestoneInputs">
+        <div class="flex items-center gap-2">
+          <input type="text" data-idx="0" data-field="tag" maxlength="6" value="T-6" class="ms-tag w-14 bg-slate-950 border border-slate-800 rounded-lg px-2 py-1.5 text-xs font-mono-tech text-cyan-300 text-center focus:outline-none focus:border-cyan-500" />
+          <input type="text" data-idx="0" data-field="text" maxlength="25" value="Lock goal & T-minus plan" class="ms-text w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-500" />
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="text" data-idx="1" data-field="tag" maxlength="6" value="T-4" class="ms-tag w-14 bg-slate-950 border border-slate-800 rounded-lg px-2 py-1.5 text-xs font-mono-tech text-cyan-300 text-center focus:outline-none focus:border-cyan-500" />
+          <input type="text" data-idx="1" data-field="text" maxlength="25" value="Build interactive lock studio" class="ms-text w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-500" />
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="text" data-idx="2" data-field="tag" maxlength="6" value="T-2" class="ms-tag w-14 bg-slate-950 border border-slate-800 rounded-lg px-2 py-1.5 text-xs font-mono-tech text-cyan-300 text-center focus:outline-none focus:border-cyan-500" />
+          <input type="text" data-idx="2" data-field="text" maxlength="25" value="Test phone & laptop clocks" class="ms-text w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-500" />
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="text" data-idx="3" data-field="tag" maxlength="6" value="T-0" class="ms-tag w-14 bg-slate-950 border border-slate-800 rounded-lg px-2 py-1.5 text-xs font-mono-tech text-cyan-300 text-center focus:outline-none focus:border-cyan-500" />
+          <input type="text" data-idx="3" data-field="text" maxlength="25" value="Submit before midnight" class="ms-text w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-500" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Safe-Zone Rulers Toggle & 4K Export Suite -->
+    <section class="bg-slate-900/75 border border-slate-800/80 rounded-2xl p-4 space-y-3.5">
+      <div class="flex items-center justify-between">
+        <label class="flex items-center justify-between cursor-pointer select-none flex-1">
+          <div>
+            <span class="block text-xs font-bold text-white">Mathematical OS Safe-Zone Rulers</span>
+            <span class="block text-[11px] text-slate-400">Display 0–32% clock &amp; 85–100% shortcut zones</span>
+          </div>
+        </label>
+        <div class="relative">
+          <input id="safeZoneToggle" type="checkbox" checked class="sr-only peer" />
+          <div class="w-11 h-6 bg-slate-800 rounded-full peer peer-checked:bg-cyan-500 transition"></div>
+          <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition peer-checked:translate-x-5"></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-2 pt-1">
+        <button id="downloadWallpaperBtn" type="button"
+          class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-400 to-amber-300 hover:from-cyan-300 hover:to-amber-200 active:scale-[0.99] text-slate-950 font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download 4K Ultra-HD Wallpaper PNG
+        </button>
+
+        <div class="grid grid-cols-2 gap-2">
+          <button id="downloadCoverBtn" type="button"
+            class="py-2.5 px-3 rounded-xl bg-slate-800/90 hover:bg-slate-700 active:scale-[0.99] text-white border border-slate-700 font-semibold text-xs flex items-center justify-center gap-1.5 transition">
+            <svg class="w-3.5 h-3.5 text-amber-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            3:2 Handshake Cover
+          </button>
+
+          <button id="downloadSeriesBtn" type="button"
+            class="py-2.5 px-3 rounded-xl bg-slate-800/90 hover:bg-slate-700 active:scale-[0.99] text-white border border-slate-700 font-semibold text-xs flex items-center justify-center gap-1.5 transition">
+            <svg class="w-3.5 h-3.5 text-cyan-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="6" height="16" rx="1"/><rect x="9" y="4" width="6" height="16" rx="1"/><rect x="16" y="4" width="6" height="16" rx="1"/></svg>
+            4-Day Series Sheet
+          </button>
+        </div>
+      </div>
+    </section>
+  </aside>
+
+  <!-- RIGHT LIVE 3D SPATIAL PREVIEW STAGE -->
+  <main class="flex-1 studio-grid flex flex-col items-center justify-between p-4 sm:p-8 min-h-[640px] lg:h-screen lg:overflow-hidden relative">
+    
+    <!-- Top Stage Status Bar -->
+    <div class="w-full max-w-5xl flex flex-wrap items-center justify-between gap-2 z-10">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-xs text-slate-300 backdrop-blur-md">
+        <span id="canvasSpecLabel" class="font-mono-tech text-cyan-400 font-bold">2160 × 3840 PX (4K UHD)</span>
+        <span class="text-slate-600">|</span>
+        <span id="safeZoneStatusLabel" class="text-amber-300 font-medium">Safe-Zones Verified (0–32% &amp; 85–100%)</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="copyAutomationBtn" type="button"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 text-xs font-medium text-slate-300 transition">
+          <span class="text-amber-400">⚡</span>
+          <span id="autoBtnText">Copy Auto-Swap Guide</span>
+        </button>
+
+        <button id="copyWriteupBtn" type="button"
+          class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/40 text-xs font-semibold text-cyan-200 transition">
+          <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span id="copyBtnText">Copy 500-Char Description</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Centered Interactive 3D Tilt Canvas Wrapper -->
+    <div id="stageContainer" class="flex-1 w-full flex items-center justify-center my-3 overflow-hidden">
+      <div id="canvasFrame" class="relative rounded-[34px] p-2.5 bg-gradient-to-b from-slate-700/70 via-slate-900/95 to-slate-950 border border-white/15 shadow-[0_35px_90px_-15px_rgba(0,0,0,0.9)]">
+        <div class="relative overflow-hidden rounded-[25px]">
+          <canvas id="previewCanvas" class="block"></canvas>
+          <div id="specularGlare" class="absolute inset-0"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Toast / Helper Bar -->
+    <div class="w-full max-w-5xl flex items-center justify-center z-10">
+      <div id="toastBanner" class="px-4 py-2 rounded-full bg-slate-900/90 border border-slate-800 text-xs text-slate-400 text-center backdrop-blur-md transition-all">
+        Scrub <strong class="text-amber-300">Simulate Day (T-6 → T-0)</strong> to watch your <strong class="text-cyan-300">3D Hero</strong> travel checkpoint-by-checkpoint toward T-0.
+      </div>
+    </div>
+
+    <!-- Hidden Offscreen Canvas for Full-Res 4K & Cover Exports -->
+    <canvas id="exportCanvas" class="hidden"></canvas>
+  </main>
+
+  <script>
+    const PRESETS = {
+      challenge: {
+        goal: "Win $1,000 AI Challenge",
+        date: "NOV 23",
+        stakes: "Prove I can ship real AI products & win $1,000.",
+        milestones: [
+          { tag: "T-6", text: "Lock goal & T-minus plan" },
+          { tag: "T-4", text: "Build interactive lock studio" },
+          { tag: "T-2", text: "Test phone & laptop clocks" },
+          { tag: "T-0", text: "Submit before midnight" }
+        ]
+      },
+      exam: {
+        goal: "Ace Algorithms Final",
+        date: "DEC 12",
+        stakes: "Walk out of the exam hall knowing I gave 100%.",
+        milestones: [
+          { tag: "T-6", text: "Condense all lecture notes" },
+          { tag: "T-4", text: "Solve 3 past exam papers" },
+          { tag: "T-2", text: "Drill weakest proof topics" },
+          { tag: "T-0", text: "Light review & 8h sleep" }
+        ]
+      },
+      launch: {
+        goal: "Ship v2.0 SaaS Launch",
+        date: "NOV 30",
+        stakes: "Turn months of late nights into my first paying users.",
+        milestones: [
+          { tag: "T-6", text: "Freeze core feature branch" },
+          { tag: "T-4", text: "Record 60s launch demo" },
+          { tag: "T-2", text: "Test checkout & onboarding" },
+          { tag: "T-0", text: "Go live on Product Hunt" }
+        ]
+      },
+      portfolio: {
+        goal: "Land Dream AI Role",
+        date: "NOV 28",
+        stakes: "Make recruiters stop scrolling within 5 seconds.",
+        milestones: [
+          { tag: "T-6", text: "Audit top 3 case studies" },
+          { tag: "T-4", text: "Build live interactive demo" },
+          { tag: "T-2", text: "Polish impact metrics" },
+          { tag: "T-0", text: "Send 10 tailored intros" }
+        ]
+      }
+    };
+
+    const state = {
+      goal: PRESETS.challenge.goal,
+      targetDate: PRESETS.challenge.date,
+      stakes: PRESETS.challenge.stakes,
+      tone: "stoic",
+      device: "phone",
+      theme: "suithud",
+      dayStep: 2,
+      showSafeZone: true,
+      customHeroImg: null,
+      milestones: JSON.parse(JSON.stringify(PRESETS.challenge.milestones))
+    };
+
+    const previewCanvas = document.getElementById("previewCanvas");
+    const exportCanvas = document.getElementById("exportCanvas");
+    const stageContainer = document.getElementById("stageContainer");
+    const canvasFrame = document.getElementById("canvasFrame");
+    const specularGlare = document.getElementById("specularGlare");
+
+    const goalInput = document.getElementById("goalInput");
+    const dateInput = document.getElementById("dateInput");
+    const stakesInput = document.getElementById("stakesInput");
+    const daySlider = document.getElementById("daySlider");
+    const safeZoneToggle = document.getElementById("safeZoneToggle");
+
+    function getStepMetrics(dayStep) {
+      const totalSteps = state.milestones.length;
+      const daysLeft = Math.max(0, (totalSteps - 1) * 2 - dayStep);
+      const progress = Math.min(1, Math.max(0.08, (dayStep + 1) / Math.max(1, totalSteps)));
+      const suitPower = Math.min(100, Math.round(18 + (dayStep / Math.max(1, totalSteps - 1)) * 82));
+      const activeIdx = Math.min(totalSteps - 1, Math.floor((dayStep / 6) * totalSteps));
+      const tag = state.milestones[activeIdx] ? state.milestones[activeIdx].tag : "T-0";
+      const badge = daysLeft === 0 ? "T-0 ZERO HOUR" : `${daysLeft} STEPS TO TARGET`;
+
+      const hooks = {
+        stoic: [
+          "Momentum is earned in silence. Execute current target.",
+          "Building focus block by block. Do not negotiate with distraction.",
+          "Arc-core stabilized. Push through the resistance.",
+          "Final telemetry check before launch window. Precision over panic."
+        ],
+        warm: [
+          "Every hero starts at Day 1. Take the first small step today.",
+          "You're already moving—keep the streak alive one block at a time.",
+          "Look how far you've come. Today's milestone is within reach.",
+          "Two days left—trust your preparation and finish strong."
+        ],
+        zerofluff: [
+          "Define scope. Cut noise. Start.",
+          "Build core output. Zero excuses.",
+          "Hit checkpoint before tonight. Ship faster.",
+          "Final review. Prepare submission. Submit now."
+        ]
+      };
+
+      const hookList = hooks[state.tone] || hooks.stoic;
+      return { daysLeft, progress, suitPower, activeIdx, tag, badge, hook: hookList[dayStep % hookList.length] || hookList[0] };
+    }
+
+    function roundRect(ctx, x, y, w, h, r) {
+      const radius = Math.min(r, w / 2, h / 2);
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.arcTo(x + w, y, x + w, y + h, radius);
+      ctx.arcTo(x + w, y + h, x, y + h, radius);
+      ctx.arcTo(x, y + h, x, y, radius);
+      ctx.arcTo(x, y, x + w, y, radius);
+      ctx.closePath();
+    }
+
+    function wrapText(ctx, text, maxWidth) {
+      const words = String(text || "").split(" ");
+      const lines = [];
+      let current = "";
+      for (const word of words) {
+        const test = current ? `${current} ${word}` : word;
+        if (ctx.measureText(test).width > maxWidth && current) {
+          lines.push(current);
+          current = word;
+        } else {
+          current = test;
+        }
+      }
+      if (current) lines.push(current);
+      return lines;
+    }
+
+    function drawSubtleGrain(ctx, width, height, alpha = 0.025) {
+      ctx.save();
+      ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+      let seed = 1337;
+      for (let i = 0; i < 1800; i++) {
+        seed = (seed * 16807) % 2147483647;
+        const gx = seed % width;
+        seed = (seed * 16807) % 2147483647;
+        const gy = seed % height;
+        ctx.fillRect(gx, gy, 2, 2);
+      }
+      ctx.restore();
+    }
+
+    function drawArmoredHeroFigure(ctx, x, y, scale = 1, facingRight = true) {
+      ctx.save();
+      ctx.translate(x, y);
+
+      const trail = ctx.createLinearGradient(-190 * scale, 45 * scale, -12 * scale, -5 * scale);
+      trail.addColorStop(0, "rgba(56, 189, 248, 0)");
+      trail.addColorStop(0.55, "rgba(14, 165, 233, 0.52)");
+      trail.addColorStop(0.88, "rgba(186, 230, 253, 0.88)");
+      trail.addColorStop(1, "rgba(255, 255, 255, 1)");
+      ctx.fillStyle = trail;
+      ctx.beginPath();
+      ctx.moveTo(-14 * scale, -10 * scale);
+      ctx.lineTo(-195 * scale, 30 * scale);
+      ctx.lineTo(-175 * scale, 56 * scale);
+      ctx.lineTo(-8 * scale, 16 * scale);
+      ctx.closePath();
+      ctx.fill();
+
+      if (state.customHeroImg) {
+        const r = 56 * scale;
+        ctx.save();
+        ctx.shadowColor = "#38bdf8";
+        ctx.shadowBlur = 24;
+        ctx.beginPath();
+        ctx.arc(0, 0, r, 0, Math.PI * 2);
+        ctx.fillStyle = "#091322";
+        ctx.fill();
+        ctx.clip();
+        ctx.drawImage(state.customHeroImg, -r, -r, r * 2, r * 2);
+        ctx.restore();
+
+        ctx.strokeStyle = "#fbbf24";
+        ctx.lineWidth = 3.5;
+        ctx.beginPath();
+        ctx.arc(0, 0, r, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+        return;
+      }
+
+      if (!facingRight) ctx.scale(-1, 1);
+      ctx.scale(scale * 1.18, scale * 1.18);
+      ctx.rotate(-0.44);
+
+      const crimson3D = ctx.createLinearGradient(-45, -18, 25, 22);
+      crimson3D.addColorStop(0, "#450a0a");
+      crimson3D.addColorStop(0.35, "#b91c1c");
+      crimson3D.addColorStop(0.65, "#ef4444");
+      crimson3D.addColorStop(1, "#7f1d1d");
+
+      ctx.fillStyle = crimson3D;
+      roundRect(ctx, -56, -8, 42, 13, 6); ctx.fill();
+      roundRect(ctx, -50, 4, 38, 11, 5); ctx.fill();
+
+      const gold3D = ctx.createLinearGradient(-15, -16, 25, 16);
+      gold3D.addColorStop(0, "#78350f");
+      gold3D.addColorStop(0.45, "#f59e0b");
+      gold3D.addColorStop(0.75, "#fef08a");
+      gold3D.addColorStop(1, "#b45309");
+
+      ctx.fillStyle = gold3D;
+      roundRect(ctx, -28, -9, 16, 14, 4); ctx.fill();
+
+      ctx.fillStyle = crimson3D;
+      ctx.beginPath(); ctx.moveTo(-16, -15); ctx.lineTo(22, -17); ctx.lineTo(28, 0); ctx.lineTo(18, 15); ctx.lineTo(-16, 12); ctx.closePath(); ctx.fill();
+
+      ctx.strokeStyle = "rgba(254, 240, 138, 0.75)";
+      ctx.lineWidth = 1.6;
+      ctx.beginPath(); ctx.moveTo(-14, -14); ctx.lineTo(20, -16); ctx.stroke();
+
+      ctx.fillStyle = gold3D;
+      roundRect(ctx, -10, -11, 22, 22, 5); ctx.fill();
+
+      ctx.fillStyle = crimson3D;
+      roundRect(ctx, 16, -13, 38, 11, 5); ctx.fill();
+      ctx.fillStyle = gold3D;
+      roundRect(ctx, 22, -12, 12, 9, 3); ctx.fill();
+
+      ctx.fillStyle = crimson3D;
+      ctx.beginPath(); ctx.ellipse(31, -17, 14, 11, -0.15, 0, Math.PI * 2); ctx.fill();
+
+      ctx.fillStyle = gold3D;
+      ctx.beginPath(); ctx.moveTo(31, -25); ctx.lineTo(43, -20); ctx.lineTo(42, -10); ctx.lineTo(30, -9); ctx.closePath(); ctx.fill();
+
+      ctx.fillStyle = "#e0f2fe";
+      ctx.shadowColor = "#38bdf8";
+      ctx.shadowBlur = 12;
+      ctx.fillRect(34, -20, 8, 3.2);
+      ctx.shadowBlur = 0;
+
+      const coreGlow = ctx.createRadialGradient(5, 0, 1, 5, 0, 14);
+      coreGlow.addColorStop(0, "#ffffff");
+      coreGlow.addColorStop(0.45, "#38bdf8");
+      coreGlow.addColorStop(1, "rgba(56, 189, 248, 0)");
+      ctx.fillStyle = coreGlow;
+      ctx.beginPath(); ctx.arc(5, 0, 14, 0, Math.PI * 2); ctx.fill();
+
+      const palmGlow = ctx.createRadialGradient(56, -8, 1, 56, -8, 16);
+      palmGlow.addColorStop(0, "#ffffff");
+      palmGlow.addColorStop(0.5, "#38bdf8");
+      palmGlow.addColorStop(1, "rgba(56, 189, 248, 0)");
+      ctx.fillStyle = palmGlow;
+      ctx.beginPath(); ctx.arc(56, -8, 16, 0, Math.PI * 2); ctx.fill();
+
+      ctx.restore();
+    }
+
+    function drawWebSlingerFigure(ctx, x, y, anchorX, anchorY, scale = 1) {
+      ctx.save();
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.9)";
+      ctx.lineWidth = 3.5;
+      ctx.shadowColor = "rgba(147, 197, 253, 0.8)";
+      ctx.shadowBlur = 10;
+      ctx.beginPath(); ctx.moveTo(x + 14 * scale, y - 22 * scale); ctx.lineTo(anchorX, anchorY); ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      if (state.customHeroImg) {
+        const r = 56 * scale;
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.shadowColor = "#ef4444";
+        ctx.shadowBlur = 24;
+        ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.fillStyle = "#0b1120"; ctx.fill();
+        ctx.clip();
+        ctx.drawImage(state.customHeroImg, -r, -r, r * 2, r * 2);
+        ctx.restore();
+
+        ctx.strokeStyle = "#ef4444";
+        ctx.lineWidth = 3.5;
+        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke();
+        ctx.restore();
+        return;
+      }
+
+      ctx.translate(x, y);
+      ctx.scale(scale * 1.15, scale * 1.15);
+
+      const suitRed3D = ctx.createLinearGradient(-18, -32, 18, 22);
+      suitRed3D.addColorStop(0, "#fca5a5"); suitRed3D.addColorStop(0.28, "#ef4444"); suitRed3D.addColorStop(0.72, "#991b1b"); suitRed3D.addColorStop(1, "#450a0a");
+
+      const suitBlue3D = ctx.createLinearGradient(-26, -6, 20, 42);
+      suitBlue3D.addColorStop(0, "#60a5fa"); suitBlue3D.addColorStop(0.4, "#1d4ed8"); suitBlue3D.addColorStop(1, "#0f172a");
+
+      ctx.lineCap = "round"; ctx.lineJoin = "round";
+
+      ctx.strokeStyle = suitBlue3D; ctx.lineWidth = 10;
+      ctx.beginPath(); ctx.moveTo(-6, 10); ctx.lineTo(-22, 26); ctx.lineTo(-36, 18); ctx.stroke();
+
+      ctx.beginPath(); ctx.moveTo(-2, 10); ctx.lineTo(18, 20); ctx.lineTo(8, 38); ctx.stroke();
+      ctx.strokeStyle = suitRed3D; ctx.lineWidth = 8.5;
+      ctx.beginPath(); ctx.moveTo(13, 29); ctx.lineTo(8, 38); ctx.stroke();
+
+      ctx.strokeStyle = suitRed3D; ctx.lineWidth = 9.5;
+      ctx.beginPath(); ctx.moveTo(2, -12); ctx.lineTo(15, -32); ctx.stroke();
+
+      ctx.beginPath(); ctx.moveTo(-6, -10); ctx.lineTo(-28, 3); ctx.stroke();
+
+      ctx.fillStyle = suitBlue3D; roundRect(ctx, -13, -15, 22, 28, 9); ctx.fill();
+      ctx.fillStyle = suitRed3D;
+      ctx.beginPath(); ctx.moveTo(-11, -15); ctx.lineTo(9, -15); ctx.lineTo(6, 10); ctx.lineTo(-8, 10); ctx.closePath(); ctx.fill();
+
+      ctx.fillStyle = suitRed3D;
+      ctx.beginPath(); ctx.ellipse(4, -24, 11.5, 13, 0.18, 0, Math.PI * 2); ctx.fill();
+
+      ctx.fillStyle = "#090d16";
+      ctx.beginPath(); ctx.ellipse(9, -24, 6.5, 3.6, -0.32, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#ffffff";
+      ctx.beginPath(); ctx.ellipse(9, -24, 4.8, 2.3, -0.32, 0, Math.PI * 2); ctx.fill();
+
+      ctx.restore();
+    }
+
+    function drawCornerBrackets(ctx, x, y, w, h, len, color, lineWidth = 3) {
+      ctx.save();
+      ctx.strokeStyle = color; ctx.lineWidth = lineWidth;
+      ctx.beginPath(); ctx.moveTo(x, y + len); ctx.lineTo(x, y); ctx.lineTo(x + len, y); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x + w - len, y); ctx.lineTo(x + w, y); ctx.lineTo(x + w, y + len); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x, y + h - len); ctx.lineTo(x, y + h); ctx.lineTo(x + len, y + h); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x + w - len, y + h); ctx.lineTo(x + w, y + h); ctx.lineTo(x + w, y + h - len); ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawArcCoreGauge(ctx, cx, cy, radius, progress, suitPower, tag, primaryColor, accentColor) {
+      ctx.save();
+      const glow = ctx.createRadialGradient(cx, cy, radius * 0.2, cx, cy, radius * 1.35);
+      glow.addColorStop(0, "rgba(56, 189, 248, 0.28)");
+      glow.addColorStop(1, "rgba(56, 189, 248, 0)");
+      ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(cx, cy, radius * 1.35, 0, Math.PI * 2); ctx.fill();
+
+      ctx.strokeStyle = "rgba(56, 189, 248, 0.25)"; ctx.lineWidth = 10;
+      ctx.beginPath(); ctx.arc(cx, cy, radius, 0, Math.PI * 2); ctx.stroke();
+
+      ctx.strokeStyle = primaryColor; ctx.lineWidth = 12; ctx.lineCap = "round";
+      ctx.beginPath(); ctx.arc(cx, cy, radius, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * progress); ctx.stroke();
+
+      const ir = radius * 0.68;
+      ctx.strokeStyle = accentColor; ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.moveTo(cx - ir * 0.85, cy - ir * 0.45); ctx.lineTo(cx + ir * 0.85, cy - ir * 0.45); ctx.lineTo(cx, cy + ir * 0.92); ctx.closePath(); ctx.stroke();
+
+      ctx.textAlign = "center"; ctx.fillStyle = "#ffffff";
+      ctx.font = `800 ${Math.round(radius * 0.34)}px 'Space Grotesk', sans-serif`;
+      ctx.fillText(tag, cx, cy + 4);
+
+      ctx.fillStyle = accentColor;
+      ctx.font = `800 ${Math.round(radius * 0.13)}px 'JetBrains Mono', monospace`;
+      ctx.fillText(`POWER ${suitPower}%`, cx, cy + radius * 0.34);
+      ctx.restore();
+    }
+
+    function drawSystemClockOverlay(ctx, width, height, device, isLightBg = false) {
+      ctx.save();
+      const textColor = isLightBg ? "rgba(15, 23, 42, 0.92)" : "rgba(255, 255, 255, 0.94)";
+      const subColor = isLightBg ? "rgba(15, 23, 42, 0.72)" : "rgba(255, 255, 255, 0.75)";
+      const badgeBg = isLightBg ? "rgba(15, 23, 42, 0.1)" : "rgba(255, 255, 255, 0.14)";
+
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' : ''}${minutes}`;
+      const options = { weekday: 'long', month: 'long', day: 'numeric' };
+      const formattedDate = now.toLocaleDateString('en-US', options);
+
+      if (device === "phone") {
+        const topSafeH = height * 0.32;
+        const bottomSafeY = height * 0.85;
+
+        ctx.fillStyle = "rgba(56, 189, 248, 0.04)";
+        ctx.fillRect(0, 0, width, topSafeH);
+        ctx.fillStyle = "rgba(251, 191, 36, 0.04)";
+        ctx.fillRect(0, bottomSafeY, width, height - bottomSafeY);
+
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.35)"; ctx.lineWidth = 2; ctx.setLineDash([12, 12]);
+        ctx.beginPath(); ctx.moveTo(0, topSafeH); ctx.lineTo(width, topSafeH); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, bottomSafeY); ctx.lineTo(width, bottomSafeY); ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = "#38bdf8"; ctx.font = "700 18px 'JetBrains Mono', monospace"; ctx.textAlign = "left";
+        ctx.fillText("TOP SAFE ZONE (0%–32%): CLOCK & WIDGETS CLEAR", 64, 52);
+        ctx.fillStyle = "#fbbf24";
+        ctx.fillText("BOTTOM SAFE ZONE (85%–100%): FLASHLIGHT / CAMERA", 64, bottomSafeY + 45);
+
+        roundRect(ctx, width / 2 - 145, 72, 290, 74, 37);
+        ctx.fillStyle = "#000000"; ctx.fill();
+
+        ctx.textAlign = "center"; ctx.fillStyle = subColor;
+        ctx.font = "600 34px 'Inter', sans-serif";
+        ctx.fillText(formattedDate, width / 2, 260);
+
+        ctx.fillStyle = textColor; ctx.font = "800 220px 'Inter', sans-serif";
+        ctx.fillText(formattedTime, width / 2, 475);
+
+        [156, width - 156].forEach((bx, idx) => {
+          ctx.beginPath(); ctx.arc(bx, height - 165, 52, 0, Math.PI * 2);
+          ctx.fillStyle = badgeBg; ctx.fill();
+          ctx.fillStyle = textColor; ctx.font = "700 30px 'Inter', sans-serif";
+          ctx.fillText(idx === 0 ? "🔦" : "📷", bx, height - 154);
+        });
+
+        roundRect(ctx, width / 2 - 190, height - 42, 380, 12, 6);
+        ctx.fillStyle = textColor; ctx.fill();
+      } else {
+        roundRect(ctx, 40, height - 92, width - 80, 68, 20);
+        ctx.fillStyle = badgeBg; ctx.fill();
+        ctx.textAlign = "center"; ctx.fillStyle = subColor;
+        ctx.font = "700 22px 'JetBrains Mono', monospace";
+        ctx.fillText(`DESKTOP DOCK & TASKBAR SAFE-ZONE  •  ${formattedTime} ${hours >= 12 ? 'PM' : 'AM'}`, width / 2, height - 50);
+      }
+      ctx.restore();
+    }
+
+    // THEME 1: TACTICAL SUIT HUD
+    function renderSuitHudTheme(ctx, width, height, device, m, showOverlay) {
+      const bg = ctx.createRadialGradient(width * 0.5, height * 0.42, 40, width * 0.5, height * 0.42, Math.max(width, height) * 0.75);
+      bg.addColorStop(0, "#0b192c"); bg.addColorStop(0.55, "#060b14"); bg.addColorStop(1, "#030509");
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, width, height);
+
+      ctx.strokeStyle = "rgba(56, 189, 248, 0.06)"; ctx.lineWidth = 1.5;
+      for (let gx = 80; gx < width; gx += 120) { ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, height); ctx.stroke(); }
+      for (let gy = 80; gy < height; gy += 120) { ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(width, gy); ctx.stroke(); }
+
+      if (device === "phone") {
+        const padX = 76; const cardW = width - padX * 2; let y = 555;
+
+        ctx.textAlign = "left"; ctx.fillStyle = "#38bdf8"; ctx.font = "800 21px 'JetBrains Mono', monospace";
+        ctx.fillText(`MARK VII TACTICAL HUD  //  TARGET: ${state.targetDate}`, padX, y);
+
+        y += 62; ctx.fillStyle = "#f8fafc"; ctx.font = "800 52px 'Space Grotesk', sans-serif";
+        const gLines = wrapText(ctx, state.goal.toUpperCase(), cardW);
+        gLines.slice(0, 2).forEach((line) => { ctx.fillText(line, padX, y); y += 60; });
+
+        y += 20;
+        const coreBoxH = 440;
+        roundRect(ctx, padX, y, cardW, coreBoxH, 28);
+        ctx.fillStyle = "rgba(10, 18, 32, 0.86)"; ctx.fill();
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.32)"; ctx.lineWidth = 2; ctx.stroke();
+        drawCornerBrackets(ctx, padX + 14, y + 14, cardW - 28, coreBoxH - 28, 28, "#fbbf24", 3);
+
+        drawArcCoreGauge(ctx, padX + 225, y + coreBoxH / 2, 148, m.progress, m.suitPower, m.tag, "#38bdf8", "#fbbf24");
+
+        const infoX = padX + 430; const infoW = cardW - 465;
+        ctx.textAlign = "left"; ctx.fillStyle = "#fbbf24"; ctx.font = "800 20px 'JetBrains Mono', monospace";
+        ctx.fillText("ACTIVE SUB-SYSTEM", infoX, y + 74);
+
+        ctx.fillStyle = "#ffffff"; ctx.font = "800 34px 'Space Grotesk', sans-serif";
+        const activeMs = state.milestones[m.activeIdx] || state.milestones[0];
+        const msLines = wrapText(ctx, activeMs.text, infoW);
+        msLines.slice(0, 2).forEach((line, i) => { ctx.fillText(line, infoX, y + 122 + i * 42); });
+
+        ctx.fillStyle = "#38bdf8"; ctx.font = "700 19px 'JetBrains Mono', monospace";
+        ctx.fillText(`STATUS: ACTIVE TARGET (${m.activeIdx + 1} OF ${state.milestones.length})`, infoX, y + 232);
+
+        roundRect(ctx, infoX, y + 252, infoW, 18, 9); ctx.fillStyle = "rgba(255, 255, 255, 0.1)"; ctx.fill();
+        roundRect(ctx, infoX, y + 252, Math.max(24, infoW * m.progress), 18, 9); ctx.fillStyle = "#fbbf24"; ctx.fill();
+
+        ctx.fillStyle = "#94a3b8"; ctx.font = "600 21px 'Inter', sans-serif";
+        const hLines = wrapText(ctx, m.hook, infoW);
+        hLines.slice(0, 2).forEach((line, i) => { ctx.fillText(line, infoX, y + 314 + i * 28); });
+
+        y += coreBoxH + 26;
+        
+        // Dynamic checkpoint list spacing with safe vertical calculation (prevents overlapping)
+        const totalMs = state.milestones.length;
+        const rowHeight = 78;
+        const seqH = Math.max(240, totalMs * rowHeight + 96);
+        roundRect(ctx, padX, y, cardW, seqH, 28);
+        ctx.fillStyle = "rgba(10, 18, 32, 0.86)"; ctx.fill();
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.25)"; ctx.lineWidth = 2; ctx.stroke();
+
+        ctx.fillStyle = "#38bdf8"; ctx.font = "800 18px 'JetBrains Mono', monospace";
+        ctx.fillText(`ALL CHECKPOINTS (1 OF ${totalMs} ACTIVE)`, padX + 36, y + 38);
+
+        const railX = padX + 54;
+        const firstRowY = y + 76;
+        const lastRowY = y + 60 + (totalMs - 1) * rowHeight + 28;
+
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.22)"; ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.moveTo(railX, firstRowY); ctx.lineTo(railX, lastRowY); ctx.stroke();
+
+        state.milestones.forEach((ms, idx) => {
+          const rowY = y + 60 + idx * rowHeight;
+          const done = idx < m.activeIdx || m.daysLeft === 0;
+          const active = idx === m.activeIdx && m.daysLeft > 0;
+
+          roundRect(ctx, padX + 96, rowY, cardW - 128, 66, 14);
+          ctx.fillStyle = active ? "rgba(56, 189, 248, 0.16)" : (done ? "rgba(16, 185, 129, 0.08)" : "rgba(255, 255, 255, 0.03)"); ctx.fill();
+          ctx.strokeStyle = active ? "#38bdf8" : (done ? "rgba(16, 185, 129, 0.45)" : "rgba(255, 255, 255, 0.08)");
+          ctx.lineWidth = active ? 2.5 : 1.5; ctx.stroke();
+
+          ctx.beginPath(); ctx.arc(railX, rowY + 33, active ? 10 : 7, 0, Math.PI * 2);
+          ctx.fillStyle = active ? "#fbbf24" : (done ? "#10b981" : "#1e293b"); ctx.fill();
+
+          ctx.fillStyle = active ? "#fbbf24" : (done ? "#10b981" : "#64748b");
+          ctx.font = "800 15px 'JetBrains Mono', monospace";
+          ctx.fillText(`${done ? "✓ CLEARED" : (active ? "▶ ACTIVE" : "○ QUEUED")} • ${ms.tag}`, padX + 116, rowY + 26);
+
+          ctx.fillStyle = active ? "#ffffff" : "#cbd5e1";
+          ctx.font = "700 20px 'Space Grotesk', sans-serif";
+          ctx.fillText(ms.text, padX + 116, rowY + 50);
+        });
+
+        drawArmoredHeroFigure(ctx, railX - 4, firstRowY + m.activeIdx * rowHeight, 0.58, true);
+
+        const stY = y + seqH + 18;
+        roundRect(ctx, padX + 36, stY, cardW - 72, 134, 20);
+        ctx.fillStyle = "rgba(251, 191, 36, 0.1)"; ctx.fill();
+        ctx.strokeStyle = "rgba(251, 191, 36, 0.45)"; ctx.lineWidth = 2; ctx.stroke();
+
+        ctx.fillStyle = "#fbbf24"; ctx.font = "800 18px 'JetBrains Mono', monospace";
+        ctx.fillText("CORE DIRECTIVE // WHY THIS MATTERS", padX + 58, stY + 36);
+        ctx.fillStyle = "#f8fafc"; ctx.font = "600 24px 'Inter', sans-serif";
+        const sLines = wrapText(ctx, `"${state.stakes}"`, cardW - 116);
+        sLines.slice(0, 2).forEach((line, i) => { ctx.fillText(line, padX + 58, stY + 76 + i * 32); });
+
+      } else {
+        const padX = 120; const padY = 80; const totalW = width - padX * 2; const totalH = height - padY * 2 - 40;
+        const leftW = 820; const rightW = totalW - leftW - 36;
+
+        roundRect(ctx, padX, padY, leftW, totalH, 34);
+        ctx.fillStyle = "rgba(10, 18, 32, 0.88)"; ctx.fill();
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.35)"; ctx.lineWidth = 2.5; ctx.stroke();
+        drawCornerBrackets(ctx, padX + 20, padY + 20, leftW - 40, totalH - 40, 36, "#fbbf24", 3);
+
+        ctx.textAlign = "left"; ctx.fillStyle = "#38bdf8"; ctx.font = "800 22px 'JetBrains Mono', monospace";
+        ctx.fillText(`MARK VII HUD  //  TARGET ${state.targetDate}`, padX + 56, padY + 68);
+
+        drawArcCoreGauge(ctx, padX + leftW / 2, padY + 320, 190, m.progress, m.suitPower, m.tag, "#38bdf8", "#fbbf24");
+
+        const stakesBoxH = 220;
+        const stakesBoxY = padY + totalH - stakesBoxH - 48;
+        roundRect(ctx, padX + 56, stakesBoxY, leftW - 112, stakesBoxH, 24);
+        ctx.fillStyle = "rgba(251, 191, 36, 0.1)"; ctx.fill();
+        ctx.strokeStyle = "rgba(251, 191, 36, 0.45)"; ctx.lineWidth = 2; ctx.stroke();
+
+        ctx.fillStyle = "#fbbf24"; ctx.font = "800 18px 'JetBrains Mono', monospace";
+        ctx.fillText("CORE DIRECTIVE // PERSONAL STAKES", padX + 86, stakesBoxY + 44);
+        ctx.fillStyle = "#f8fafc"; ctx.font = "600 26px 'Inter', sans-serif";
+        const sLines = wrapText(ctx, `"${state.stakes}"`, leftW - 172);
+        sLines.slice(0, 2).forEach((line, i) => { ctx.fillText(line, padX + 86, stakesBoxY + 86 + i * 36); });
+
+        const rightX = padX + leftW + 36;
+        roundRect(ctx, rightX, padY, rightW, totalH, 34);
+        ctx.fillStyle = "rgba(10, 18, 32, 0.88)"; ctx.fill();
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.3)"; ctx.lineWidth = 2.5; ctx.stroke();
+
+        ctx.fillStyle = "#fbbf24"; ctx.font = "800 22px 'JetBrains Mono', monospace";
+        ctx.fillText(`PRIMARY MISSION  •  ${m.badge}`, rightX + 56, padY + 70);
+
+        ctx.fillStyle = "#ffffff"; ctx.font = "800 52px 'Space Grotesk', sans-serif";
+        const gLines = wrapText(ctx, state.goal.toUpperCase(), rightW - 112);
+        gLines.slice(0, 2).forEach((line, i) => { ctx.fillText(line, rightX + 56, padY + 138 + i * 60); });
+
+        const listStartY = padY + 220;
+        const availableListH = totalH - 250;
+        const totalM = state.milestones.length;
+        const rowH = Math.min(105, Math.floor(availableListH / Math.max(1, totalM)) - 14);
+
+        state.milestones.forEach((ms, idx) => {
+          const ry = listStartY + idx * (rowH + 12);
+          const done = idx < m.activeIdx || m.daysLeft === 0;
+          const active = idx === m.activeIdx && m.daysLeft > 0;
+
+          roundRect(ctx, rightX + 130, ry, rightW - 174, rowH, 16);
+          ctx.fillStyle = active ? "rgba(56, 189, 248, 0.16)" : "rgba(255, 255, 255, 0.03)"; ctx.fill();
+          ctx.strokeStyle = active ? "#38bdf8" : (done ? "rgba(16, 185, 129, 0.45)" : "rgba(255, 255, 255, 0.1)");
+          ctx.lineWidth = active ? 2.5 : 1.5; ctx.stroke();
+
+          ctx.fillStyle = active ? "#fbbf24" : (done ? "#10b981" : "#64748b");
+          ctx.font = "800 18px 'JetBrains Mono', monospace";
+          ctx.fillText(`${done ? "✓ CLEARED" : (active ? "⌖ HERO ON TARGET" : "○ QUEUED")}  •  ${ms.tag}`, rightX + 156, ry + 32);
+
+          ctx.fillStyle = "#ffffff"; ctx.font = "700 24px 'Space Grotesk', sans-serif";
+          ctx.fillText(ms.text, rightX + 156, ry + 68);
+        });
+
+        const activeLapY = listStartY + m.activeIdx * (rowH + 12) + rowH / 2;
+        drawArmoredHeroFigure(ctx, rightX + 72, activeLapY, 0.82, true);
+      }
+
+      drawSubtleGrain(ctx, width, height, 0.025);
+      if (showOverlay) drawSystemClockOverlay(ctx, width, height, device, false);
+    }
+
+    // THEME 2: NOIR WEB-SLINGER
+    function renderWebSlingerTheme(ctx, width, height, device, m, showOverlay) {
+      const bg = ctx.createLinearGradient(0, 0, width, height);
+      bg.addColorStop(0, "#070b19"); bg.addColorStop(0.55, "#0d1326"); bg.addColorStop(1, "#160912");
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, width, height);
+
+      const webCx = device === "phone" ? width * 0.85 : width * 0.78;
+      const webCy = device === "phone" ? height * 0.32 : height * 0.36;
+      ctx.save(); ctx.strokeStyle = "rgba(239, 68, 68, 0.14)"; ctx.lineWidth = 1.5;
+      const spokes = 16;
+      for (let i = 0; i < spokes; i++) {
+        const a = (i / spokes) * Math.PI * 2;
+        ctx.beginPath(); ctx.moveTo(webCx, webCy); ctx.lineTo(webCx + Math.cos(a) * 1600, webCy + Math.sin(a) * 1600); ctx.stroke();
+      }
+      ctx.restore();
+
+      const padX = device === "phone" ? 76 : 130; const cardW = width - padX * 2; let y = device === "phone" ? 555 : 115;
+
+      ctx.textAlign = "left"; ctx.fillStyle = "#ef4444"; ctx.font = "800 22px 'JetBrains Mono', monospace";
+      ctx.fillText(`SECTOR BLUEPRINT // DEADLINE ${state.targetDate} // ${m.badge}`, padX, y);
+
+      y += 62; ctx.fillStyle = "#f8fafc"; ctx.font = "800 54px 'Space Grotesk', sans-serif";
+      ctx.fillText(state.goal.toUpperCase(), padX, y);
+
+      y += 42; ctx.fillStyle = "#93c5fd"; ctx.font = "600 27px 'Inter', sans-serif";
+      ctx.fillText(`Stakes: "${state.stakes}"`, padX, y);
+
+      y += 50; const mapH = device === "phone" ? 1250 : 900;
+      roundRect(ctx, padX, y, cardW, mapH, 32);
+      ctx.fillStyle = "rgba(8, 12, 26, 0.86)"; ctx.fill();
+      ctx.strokeStyle = "rgba(239, 68, 68, 0.42)"; ctx.lineWidth = 2.5; ctx.stroke();
+
+      const totalM = state.milestones.length;
+      const anchors = [];
+      for (let i = 0; i < totalM; i++) {
+        const py = y + 160 + (i / Math.max(1, totalM - 1)) * (mapH - 280);
+        const px = device === "phone" ? (i % 2 === 0 ? padX + 170 : padX + cardW - 170) : padX + 240 + (i / Math.max(1, totalM - 1)) * (cardW - 480);
+        anchors.push({ x: px, y: py });
+      }
+
+      ctx.strokeStyle = "#ef4444"; ctx.lineWidth = 7; ctx.shadowColor = "#ef4444"; ctx.shadowBlur = 16;
+      ctx.beginPath();
+      anchors.forEach((a, i) => { if (i <= m.activeIdx) i === 0 ? ctx.moveTo(a.x, a.y) : ctx.lineTo(a.x, a.y); });
+      ctx.stroke(); ctx.shadowBlur = 0;
+
+      anchors.forEach((a, idx) => {
+        const ms = state.milestones[idx];
+        const done = idx < m.activeIdx || m.daysLeft === 0;
+        const active = idx === m.activeIdx && m.daysLeft > 0;
+
+        if (active) {
+          [38, 56, 74].forEach((rr, ri) => {
+            ctx.beginPath(); ctx.arc(a.x, a.y, rr, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(239, 68, 68, ${0.55 - ri * 0.15})`; ctx.lineWidth = 2.5; ctx.stroke();
+          });
+        }
+
+        ctx.beginPath(); ctx.arc(a.x, a.y, 24, 0, Math.PI * 2);
+        ctx.fillStyle = done ? "#3b82f6" : (active ? "#ef4444" : "#0f172a"); ctx.fill();
+        ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 3.5; ctx.stroke();
+
+        ctx.textAlign = "center"; ctx.fillStyle = "#ffffff"; ctx.font = "800 20px 'JetBrains Mono', monospace";
+        ctx.fillText(done ? "✓" : (idx + 1), a.x, a.y + 7);
+
+        const lblW = device === "phone" ? 520 : 430; const lblH = 100;
+        const lx = device === "phone" ? (idx % 2 === 0 ? a.x + 48 : a.x - lblW - 48) : Math.max(padX + 40, Math.min(padX + cardW - lblW - 40, a.x - lblW / 2));
+        const ly = device === "phone" ? a.y - lblH / 2 : (idx % 2 === 0 ? a.y + 48 : a.y - lblH - 48);
+
+        roundRect(ctx, lx, ly, lblW, lblH, 18);
+        ctx.fillStyle = active ? "rgba(239, 68, 68, 0.2)" : "rgba(15, 23, 42, 0.92)"; ctx.fill();
+        ctx.strokeStyle = active ? "#ef4444" : "rgba(96, 165, 250, 0.3)"; ctx.lineWidth = 2; ctx.stroke();
+
+        ctx.textAlign = "left"; ctx.fillStyle = active ? "#fca5a5" : "#60a5fa"; ctx.font = "800 17px 'JetBrains Mono', monospace";
+        ctx.fillText(`${ms.tag}${active ? " // SPIDER-SENSE" : ""}`, lx + 18, ly + 34);
+
+        ctx.fillStyle = "#ffffff"; ctx.font = "700 22px 'Space Grotesk', sans-serif";
+        ctx.fillText(ms.text, lx + 18, ly + 72);
+      });
+
+      const activeAnchor = anchors[m.activeIdx] || anchors[0];
+      const swingX = activeAnchor.x + (device === "phone" ? (m.activeIdx % 2 === 0 ? -36 : 36) : 0);
+      const swingY = activeAnchor.y - 68;
+      drawWebSlingerFigure(ctx, swingX, swingY, activeAnchor.x + 90, y + 20, device === "phone" ? 1.15 : 1.25);
+
+      const footY = y + mapH - 84;
+      roundRect(ctx, padX + 36, footY, cardW - 72, 58, 16);
+      ctx.fillStyle = "rgba(239, 68, 68, 0.22)"; ctx.fill();
+      ctx.strokeStyle = "rgba(239, 68, 68, 0.55)"; ctx.lineWidth = 2; ctx.stroke();
+      ctx.textAlign = "center"; ctx.fillStyle = "#fecaca"; ctx.font = "700 21px 'Inter', sans-serif";
+      ctx.fillText(m.hook, padX + cardW / 2, footY + 36);
+
+      if (showOverlay) drawSystemClockOverlay(ctx, width, height, device, false);
+    }
+
+    // THEME 3: GRAPHIC NOVEL COVER
+    function renderComicIssueTheme(ctx, width, height, device, m, showOverlay) {
+      ctx.fillStyle = "#f3efe6"; ctx.fillRect(0, 0, width, height);
+
+      ctx.fillStyle = "rgba(220, 38, 38, 0.14)";
+      for (let hx = 60; hx < width; hx += 26) {
+        for (let hy = 60; hy < height * 0.55; hy += 26) {
+          ctx.beginPath(); ctx.arc(hx, hy, 4, 0, Math.PI * 2); ctx.fill();
+        }
+      }
+
+      if (device === "phone") {
+        const padX = 72; const cardW = width - padX * 2; const topY = 550; const coverH = 1680;
+
+        ctx.fillStyle = "#111111"; ctx.fillRect(padX, topY, cardW, coverH);
+        ctx.fillStyle = "#faf8f3"; ctx.fillRect(padX + 10, topY + 10, cardW - 20, coverH - 20);
+
+        ctx.fillStyle = "#111111"; ctx.fillRect(padX + 10, topY + 10, cardW - 20, 145);
+        ctx.fillStyle = "#dc2626"; ctx.fillRect(padX + 10, topY + 10, 210, 145);
+
+        ctx.textAlign = "center"; ctx.fillStyle = "#ffffff"; ctx.font = "800 20px 'JetBrains Mono', monospace";
+        ctx.fillText("ISSUE", padX + 115, topY + 52);
+        ctx.font = "800 54px 'Space Grotesk', sans-serif"; ctx.fillText(`#0${m.daysLeft}`, padX + 115, topY + 112);
+        ctx.font = "700 17px 'JetBrains Mono', monospace"; ctx.fillText(state.targetDate, padX + 115, topY + 140);
+
+        ctx.textAlign = "left"; ctx.fillStyle = "#fbbf24"; ctx.font = "800 20px 'JetBrains Mono', monospace";
+        ctx.fillText("COLLECTOR'S EDITION", padX + 245, topY + 56);
+        ctx.fillStyle = "#ffffff"; ctx.font = "800 44px 'Space Grotesk', sans-serif";
+        const mastLines = wrapText(ctx, state.goal.toUpperCase(), cardW - 270);
+        ctx.fillText(mastLines[0] || state.goal.toUpperCase(), padX + 245, topY + 114);
+
+        let py = topY + 195;
+        ctx.fillStyle = "#dc2626"; ctx.font = "800 22px 'JetBrains Mono', monospace";
+        ctx.fillText(`STORY ARC CHECKPOINTS  •  ${m.badge}`, padX + 30, py);
+
+        py += 42;
+        state.milestones.forEach((ms, idx) => {
+          const done = idx < m.activeIdx || m.daysLeft === 0;
+          const active = idx === m.activeIdx && m.daysLeft > 0;
+          ctx.fillStyle = active ? "#dc2626" : (done ? "#78716c" : "#111111");
+          ctx.font = active ? "800 26px 'Space Grotesk', sans-serif" : "700 22px 'Space Grotesk', sans-serif";
+          ctx.fillText(`${done ? "✓" : (active ? "▶" : "•")}  ${ms.tag}: ${ms.text}`, padX + 30, py);
+          py += 44;
+        });
+      } else {
+        const padX = 120; const padY = 105; const totalW = width - padX * 2; const totalH = height - padY * 2 - 48;
+        ctx.fillStyle = "#111111"; ctx.fillRect(padX, padY, totalW, totalH);
+        ctx.fillStyle = "#faf8f3"; ctx.fillRect(padX + 12, padY + 12, totalW - 24, totalH - 24);
+
+        ctx.fillStyle = "#dc2626"; ctx.fillRect(padX + 12, padY + 12, 230, 175);
+        ctx.textAlign = "center"; ctx.fillStyle = "#ffffff"; ctx.font = "800 22px 'JetBrains Mono', monospace";
+        ctx.fillText("ISSUE", padX + 127, padY + 58);
+        ctx.font = "800 72px 'Space Grotesk', sans-serif"; ctx.fillText(`#0${m.daysLeft}`, padX + 127, padY + 132);
+
+        ctx.textAlign = "left"; ctx.fillStyle = "#dc2626"; ctx.font = "800 24px 'JetBrains Mono', monospace";
+        ctx.fillText("COLLECTOR'S GRAPHIC NOVEL EDITION", padX + 280, padY + 68);
+        ctx.fillStyle = "#111111"; ctx.font = "800 72px 'Space Grotesk', sans-serif";
+        ctx.fillText(state.goal.toUpperCase(), padX + 280, padY + 150);
+      }
+
+      if (showOverlay) drawSystemClockOverlay(ctx, width, height, device, true);
+    }
+
+    // THEME 4: DARK KNIGHT DOSSIER
+    function renderDarkKnightTheme(ctx, width, height, device, m, showOverlay) {
+      ctx.fillStyle = "#08080a"; ctx.fillRect(0, 0, width, height);
+
+      ctx.strokeStyle = "rgba(245, 158, 11, 0.08)"; ctx.lineWidth = 2;
+      for (let r = 140; r < 1500; r += 140) {
+        ctx.beginPath(); ctx.arc(width * 0.5, height * 0.45, r, Math.PI * 0.1, Math.PI * 0.9); ctx.stroke();
+      }
+
+      const padX = device === "phone" ? 76 : 130; const cardW = width - padX * 2; let y = device === "phone" ? 555 : 110;
+
+      ctx.textAlign = "left"; ctx.fillStyle = "#f59e0b"; ctx.font = "800 22px 'JetBrains Mono', monospace";
+      ctx.fillText(`CASEFILE #1123  //  DEADLINE: ${state.targetDate}  //  ${m.badge}`, padX, y);
+
+      y += 64; ctx.fillStyle = "#fafafa"; ctx.font = "800 54px 'Space Grotesk', sans-serif";
+      ctx.fillText(state.goal.toUpperCase(), padX, y);
+
+      y += 50; const boxH = device === "phone" ? 1300 : 940;
+      roundRect(ctx, padX, y, cardW, boxH, 26);
+      ctx.fillStyle = "#111115"; ctx.fill();
+      ctx.strokeStyle = "rgba(245, 158, 11, 0.35)"; ctx.lineWidth = 2.5; ctx.stroke();
+      drawCornerBrackets(ctx, padX + 16, y + 16, cardW - 32, boxH - 32, 32, "#f59e0b", 3);
+
+      const barPad = 48;
+      ctx.fillStyle = "#a1a1aa"; ctx.font = "800 20px 'JetBrains Mono', monospace";
+      ctx.fillText(`MISSION READINESS: ${m.suitPower}%`, padX + barPad, y + 66);
+      ctx.textAlign = "right"; ctx.fillStyle = "#f59e0b"; ctx.fillText(`${m.daysLeft} DAYS TO ZERO HOUR`, padX + cardW - barPad, y + 66);
+
+      roundRect(ctx, padX + barPad, y + 88, cardW - barPad * 2, 22, 6);
+      ctx.fillStyle = "#27272a"; ctx.fill();
+      roundRect(ctx, padX + barPad, y + 88, Math.max(24, (cardW - barPad * 2) * m.progress), 22, 6);
+      ctx.fillStyle = "#f59e0b"; ctx.fill();
+
+      ctx.textAlign = "left";
+      roundRect(ctx, padX + barPad, y + 142, cardW - barPad * 2, 150, 16);
+      ctx.fillStyle = "#18181d"; ctx.fill();
+
+      ctx.fillStyle = "#f59e0b"; ctx.font = "800 18px 'JetBrains Mono', monospace";
+      ctx.fillText("MOTIVE // PERSONAL STAKES", padX + barPad + 26, y + 180);
+      ctx.fillStyle = "#f4f4f5"; ctx.font = "600 26px 'Inter', sans-serif";
+      const sLines = wrapText(ctx, `"${state.stakes}"`, cardW - barPad * 2 - 52);
+      sLines.slice(0, 2).forEach((line, i) => { ctx.fillText(line, padX + barPad + 26, y + 222 + i * 34); });
+
+      const msStartY = y + 320; const msGap = device === "phone" ? 150 : 125;
+      state.milestones.forEach((ms, idx) => {
+        const ry = msStartY + idx * msGap;
+        const done = idx < m.activeIdx || m.daysLeft === 0;
+        const active = idx === m.activeIdx && m.daysLeft > 0;
+
+        roundRect(ctx, padX + barPad, ry, cardW - barPad * 2, msGap - 20, 16);
+        ctx.fillStyle = active ? "rgba(245, 158, 11, 0.14)" : "#16161b"; ctx.fill();
+        ctx.strokeStyle = active ? "#f59e0b" : (done ? "rgba(16, 185, 129, 0.35)" : "rgba(255, 255, 255, 0.08)");
+        ctx.lineWidth = active ? 2.5 : 1.5; ctx.stroke();
+
+        ctx.fillStyle = active ? "#f59e0b" : (done ? "#10b981" : "#71717a");
+        ctx.font = "800 19px 'JetBrains Mono', monospace";
+        ctx.fillText(`${done ? "✓ RESOLVED" : (active ? "▶ ACTIVE PHASE" : "○ PENDING")}  •  ${ms.tag}`, padX + barPad + 24, ry + 36);
+
+        ctx.fillStyle = active ? "#ffffff" : "#d4d4d8"; ctx.font = "700 26px 'Space Grotesk', sans-serif";
+        ctx.fillText(ms.text, padX + barPad + 24, ry + 74);
+      });
+
+      drawSubtleGrain(ctx, width, height, 0.03);
+      if (showOverlay) drawSystemClockOverlay(ctx, width, height, device, false);
+    }
+
+    function renderLockScreen(ctx, width, height, options = {}) {
+      const device = options.device || state.device;
+      const theme = options.theme || state.theme;
+      const dayStep = options.dayStep !== undefined ? options.dayStep : state.dayStep;
+      const showOverlay = options.showSafeZone !== undefined ? options.showSafeZone : state.showSafeZone;
+      const metrics = getStepMetrics(dayStep);
+
+      ctx.save();
+      if (theme === "suithud") renderSuitHudTheme(ctx, width, height, device, metrics, showOverlay);
+      else if (theme === "webslinger") renderWebSlingerTheme(ctx, width, height, device, metrics, showOverlay);
+      else if (theme === "comicissue") renderComicIssueTheme(ctx, width, height, device, metrics, showOverlay);
+      else renderDarkKnightTheme(ctx, width, height, device, metrics, showOverlay);
+      ctx.restore();
+    }
+
+    function updatePreview() {
+      const nativeW = state.device === "phone" ? 1179 : 2560;
+      const nativeH = state.device === "phone" ? 2556 : 1440;
+
+      previewCanvas.width = nativeW;
+      previewCanvas.height = nativeH;
+      renderLockScreen(previewCanvas.getContext("2d"), nativeW, nativeH);
+
+      const availW = Math.max(260, stageContainer.clientWidth - 48);
+      const availH = Math.max(360, stageContainer.clientHeight - 32);
+      const scale = Math.min(availW / nativeW, availH / nativeH);
+
+      previewCanvas.style.width = `${Math.floor(nativeW * scale)}px`;
+      previewCanvas.style.height = `${Math.floor(nativeH * scale)}px`;
+
+      const m = getStepMetrics(state.dayStep);
+      document.getElementById("simBadge").textContent = m.badge;
+      document.getElementById("dotsStatsLabel").textContent = `${state.dayStep + 1}/7 DAYS ACTIVE`;
+      document.getElementById("psychQuotePreview").textContent = `"${m.hook}"`;
+      document.getElementById("canvasSpecLabel").textContent = state.device === "phone"
+        ? "1179 × 2556 PX (PHONE 9:19.5)"
+        : "2560 × 1440 PX (LAPTOP 16:9)";
+    }
+
+    function renderMilestoneInputsDom() {
+      const container = document.getElementById("milestoneInputs");
+      container.innerHTML = "";
+      state.milestones.forEach((ms, idx) => {
+        const row = document.createElement("div");
+        row.className = "flex items-center gap-2";
+        row.innerHTML = `
+          <input type="text" data-idx="${idx}" data-field="tag" maxlength="6" value="${ms.tag}" class="ms-tag w-14 bg-slate-950 border border-slate-800 rounded-lg px-2 py-1.5 text-xs font-mono-tech text-cyan-300 text-center focus:outline-none focus:border-cyan-500" />
+          <input type="text" data-idx="${idx}" data-field="text" maxlength="25" value="${ms.text}" class="ms-text w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-500" />
+          <button type="button" data-del="${idx}" class="p-1.5 text-slate-500 hover:text-red-400 transition" title="Delete milestone">✕</button>
+        `;
+        container.appendChild(row);
+      });
+
+      container.querySelectorAll(".ms-tag, .ms-text").forEach((inp) => {
+        inp.addEventListener("input", (e) => {
+          const i = parseInt(e.target.dataset.idx, 10);
+          const f = e.target.dataset.field;
+          state.milestones[i][f] = e.target.value;
+          updatePreview();
+        });
+      });
+
+      container.querySelectorAll("[data-del]").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const i = parseInt(e.target.dataset.del, 10);
+          if (state.milestones.length <= 2) {
+            showToast("Keep at least 2 milestones for the mission.");
+            return;
+          }
+          state.milestones.splice(i, 1);
+          renderMilestoneInputsDom();
+          updatePreview();
+          showToast("Milestone removed.");
+        });
+      });
+    }
+
+    document.getElementById("addMilestoneBtn").addEventListener("click", () => {
+      if (state.milestones.length >= 7) {
+        showToast("Maximum 7 milestones supported.");
+        return;
+      }
+      const newTag = `T-${Math.max(0, 6 - state.milestones.length * 2)}`;
+      state.milestones.push({ tag: newTag, text: "New checkpoint" });
+      renderMilestoneInputsDom();
+      updatePreview();
+      showToast("Added new milestone checkpoint.");
+    });
+
+    stageContainer.addEventListener("mousemove", (e) => {
+      const rect = canvasFrame.getBoundingClientRect();
+      const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+      const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -6;
+      const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 6;
+      canvasFrame.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(1.012)`;
+      specularGlare.style.opacity = "1";
+      specularGlare.style.background = `radial-gradient(circle at ${(x / rect.width) * 100}% ${(y / rect.height) * 100}%, rgba(255,255,255,0.2), transparent 65%)`;
+    });
+
+    stageContainer.addEventListener("mouseleave", () => {
+      canvasFrame.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
+      specularGlare.style.opacity = "0";
+    });
+
+    function triggerDownload(canvas, filename) {
+      const link = document.createElement("a");
+      link.download = filename;
+      link.href = canvas.toDataURL("image/png");
+      document.body.appendChild(link); link.click(); document.body.removeChild(link);
+    }
+
+    document.getElementById("downloadWallpaperBtn").addEventListener("click", () => {
+      const nativeW = state.device === "phone" ? 1179 : 2560;
+      const nativeH = state.device === "phone" ? 2556 : 1440;
+      exportCanvas.width = nativeW; exportCanvas.height = nativeH;
+      renderLockScreen(exportCanvas.getContext("2d"), nativeW, nativeH, { showSafeZone: true });
+      const tagSlug = getStepMetrics(state.dayStep).tag.toLowerCase();
+      triggerDownload(exportCanvas, `lockscreen-${state.theme}-${state.device}-${tagSlug}.png`);
+      showToast(`Downloaded precision wallpaper (${nativeW}×${nativeH}) with embedded system clock!`);
+    });
+
+    document.getElementById("downloadCoverBtn").addEventListener("click", () => {
+      const coverW = 1500; const coverH = 1000;
+      exportCanvas.width = coverW; exportCanvas.height = coverH;
+      const ctx = exportCanvas.getContext("2d");
+
+      const grad = ctx.createLinearGradient(0, 0, coverW, coverH);
+      grad.addColorStop(0, "#05070c"); grad.addColorStop(1, "#0f172a");
+      ctx.fillStyle = grad; ctx.fillRect(0, 0, coverW, coverH);
+
+      ctx.textAlign = "left"; ctx.fillStyle = "#38bdf8"; ctx.font = "800 20px 'JetBrains Mono', monospace";
+      ctx.fillText("4K CINEMATIC HERO HUD & TIME-SCARCITY LOCK SCREEN STUDIO", 72, 74);
+
+      ctx.fillStyle = "#f8fafc"; ctx.font = "800 40px 'Space Grotesk', sans-serif";
+      ctx.fillText(`${state.goal} — Due ${state.targetDate}`, 72, 124);
+
+      const lapCanvas = document.createElement("canvas");
+      lapCanvas.width = 2560; lapCanvas.height = 1440;
+      renderLockScreen(lapCanvas.getContext("2d"), 2560, 1440, { device: "laptop", showSafeZone: true });
+
+      const lapW = 920; const lapH = 518;
+      roundRect(ctx, 58, 234, lapW + 28, lapH + 28, 24); ctx.fillStyle = "#1e293b"; ctx.fill();
+      ctx.drawImage(lapCanvas, 72, 248, lapW, lapH);
+
+      const phoneCanvas = document.createElement("canvas");
+      phoneCanvas.width = 1179; phoneCanvas.height = 2556;
+      renderLockScreen(phoneCanvas.getContext("2d"), 1179, 2556, { device: "phone", showSafeZone: true });
+
+      const phW = 355; const phH = 770; const phX = 1065; const phY = 165;
+      roundRect(ctx, phX - 14, phY - 14, phW + 28, phH + 28, 46); ctx.fillStyle = "#0f172a"; ctx.fill();
+      ctx.strokeStyle = "rgba(56, 189, 248, 0.55)"; ctx.lineWidth = 3; ctx.stroke();
+
+      ctx.save(); roundRect(ctx, phX, phY, phW, phH, 34); ctx.clip();
+      ctx.drawImage(phoneCanvas, phX, phY, phW, phH); ctx.restore();
+
+      triggerDownload(exportCanvas, "handshake-showcase-cover-3x2.png");
+      showToast("Downloaded 1500×1000 (3:2) Handshake Showcase Cover!");
+    });
+
+    document.getElementById("downloadSeriesBtn").addEventListener("click", () => {
+      const sheetW = 2400; const sheetH = 1350;
+      exportCanvas.width = sheetW; exportCanvas.height = sheetH;
+      const ctx = exportCanvas.getContext("2d");
+
+      ctx.fillStyle = "#05070c"; ctx.fillRect(0, 0, sheetW, sheetH);
+      ctx.fillStyle = "#38bdf8"; ctx.font = "800 24px 'JetBrains Mono', monospace";
+      ctx.fillText("DAILY HERO PROGRESSION (T-6 → T-0)", 80, 76);
+
+      const steps = [0, 2, 4, 6];
+      const cardW = 420; const cardH = 1040;
+      steps.forEach((st, i) => {
+        const off = document.createElement("canvas");
+        off.width = 1179; off.height = 2556;
+        renderLockScreen(off.getContext("2d"), 1179, 2556, { device: "phone", dayStep: st, showSafeZone: true });
+
+        const dx = 80 + i * (cardW + 115); const dy = 185;
+        roundRect(ctx, dx - 10, dy - 10, cardW + 20, cardH + 20, 36); ctx.fillStyle = "#1e293b"; ctx.fill();
+        ctx.save(); roundRect(ctx, dx, dy, cardW, cardH, 28); ctx.clip();
+        ctx.drawImage(off, dx, dy, cardW, cardH); ctx.restore();
+      });
+
+      triggerDownload(exportCanvas, "t-minus-4-day-progression-sheet.png");
+      showToast("Downloaded 4-Day Progression Series Sheet!");
+    });
+
+    document.getElementById("copyGeminiPromptBtn").addEventListener("click", () => {
+      const promptText = `A hyper-realistic 3D render of a cinematic armored sci-fi hero in sleek crimson and titanium armor with glowing blue arc-core chest illumination, standing on a dark minimalist pedestal against a deep obsidian and navy gradient background, studio rim lighting, 8k resolution, vertical 9:16 aspect ratio, clean negative space at the top and bottom for lock screen UI.`;
+      const temp = document.createElement("textarea");
+      temp.value = promptText;
+      document.body.appendChild(temp); temp.select(); document.execCommand("copy"); document.body.removeChild(temp);
+      showToast("Copied Gemini 3D Hero Prompt! Paste into Gemini image generator.");
+    });
+
+    document.getElementById("copyWriteupBtn").addEventListener("click", () => {
+      const text = `I planned for my ${state.targetDate} goal ("${state.goal}") using Gemini to work backward into under-5-word T-minus milestones (T-6 to T-0). To turn discipline into a cinematic mission, I built an interactive 4K Hero HUD Lock Screen Studio for Phone & Laptop—featuring an Arc-Core power gauge, noir web-blueprint grid, and mathematical OS safe-zones that update daily without overlapping the lock screen clock. Lesson: framing yourself as the protagonist builds real momentum.`;
+      const clipped = text.length > 500 ? text.slice(0, 497) + "..." : text;
+      const temp = document.createElement("textarea");
+      temp.value = clipped;
+      document.body.appendChild(temp); temp.select(); document.execCommand("copy"); document.body.removeChild(temp);
+
+      const btn = document.getElementById("copyBtnText");
+      btn.textContent = `Copied (${clipped.length}/500)!`;
+      showToast("500-character Handshake description copied!");
+      setTimeout(() => (btn.textContent = "Copy 500-Char Description"), 2500);
+    });
+
+    document.getElementById("copyAutomationBtn").addEventListener("click", () => {
+      const guide = `Daily Lock Screen Auto-Swap Setup:\n1. Export your T-6, T-4, T-2, and T-0 lock screens into a 'T-Minus' album.\n2. iOS Shortcuts: Automation -> Time of Day (8:00 AM) -> Find Photos in 'T-Minus' -> Set Wallpaper Photo (Lock Screen).\n3. Android Modes & Routines: If Time is 8:00 AM -> Change Lock Screen Wallpaper.`;
+      const temp = document.createElement("textarea");
+      temp.value = guide;
+      document.body.appendChild(temp); temp.select(); document.execCommand("copy"); document.body.removeChild(temp);
+      showToast("Daily wallpaper auto-swap guide copied!");
+    });
+
+    function showToast(msg) {
+      document.getElementById("toastBanner").innerHTML = `<span class="text-cyan-400 font-bold">✓</span> <span class="text-slate-200">${msg}</span>`;
+    }
+
+    goalInput.addEventListener("input", (e) => { state.goal = e.target.value; updatePreview(); });
+    dateInput.addEventListener("input", (e) => { state.targetDate = e.target.value.toUpperCase(); updatePreview(); });
+    stakesInput.addEventListener("input", (e) => { state.stakes = e.target.value; updatePreview(); });
+    daySlider.addEventListener("input", (e) => { state.dayStep = parseInt(e.target.value, 10); updatePreview(); });
+    safeZoneToggle.addEventListener("change", (e) => { state.showSafeZone = e.target.checked; updatePreview(); });
+
+    document.getElementById("customHeroUpload").addEventListener("change", (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const img = new Image();
+        img.onload = () => {
+          state.customHeroImg = img;
+          document.getElementById("customHeroLabel").textContent = `3D Render Loaded: ${file.name}`;
+          updatePreview();
+          showToast("Custom 3D Hero render loaded successfully!");
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    document.querySelectorAll(".preset-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const p = PRESETS[btn.dataset.preset];
+        if (!p) return;
+        state.goal = p.goal; state.targetDate = p.date; state.stakes = p.stakes;
+        state.milestones = JSON.parse(JSON.stringify(p.milestones));
+
+        goalInput.value = p.goal; dateInput.value = p.date; stakesInput.value = p.stakes;
+        renderMilestoneInputsDom();
+
+        document.querySelectorAll(".preset-btn").forEach((b) => {
+          const active = b === btn;
+          b.className = active
+            ? "preset-btn px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-cyan-500/20 border border-cyan-500/50 text-cyan-200 transition"
+            : "preset-btn px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-950 border border-slate-800 text-slate-400 hover:text-slate-200 transition";
+        });
+        updatePreview();
+      });
+    });
+
+    document.querySelectorAll(".tone-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.tone = btn.dataset.tone;
+        document.querySelectorAll(".tone-btn").forEach((b) => {
+          const active = b === btn;
+          b.className = active
+            ? "tone-btn py-1.5 px-2 rounded-lg border text-[11px] font-bold transition bg-cyan-500/20 border-cyan-500 text-cyan-200"
+            : "tone-btn py-1.5 px-2 rounded-lg border text-[11px] font-bold transition bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200";
+        });
+        updatePreview();
+      });
+    });
+
+    document.querySelectorAll(".theme-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.theme = btn.dataset.theme;
+        document.querySelectorAll(".theme-btn").forEach((b) => {
+          const active = b === btn;
+          b.className = active
+            ? "theme-btn p-2.5 rounded-xl border text-left transition bg-cyan-500/15 border-cyan-500 text-white"
+            : "theme-btn p-2.5 rounded-xl border text-left transition bg-slate-950/70 border-slate-800 text-slate-400 hover:border-slate-700";
+        });
+        updatePreview();
+      });
+    });
+
+    document.querySelectorAll(".device-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.device = btn.dataset.device;
+        document.querySelectorAll(".device-btn").forEach((b) => {
+          const active = b === btn;
+          b.className = active
+            ? "device-btn flex flex-col items-start p-3 rounded-xl border text-left transition bg-cyan-500/15 border-cyan-500 text-white"
+            : "device-btn flex flex-col items-start p-3 rounded-xl border text-left transition bg-slate-950/70 border-slate-800 text-slate-400 hover:border-slate-700";
+        });
+        updatePreview();
+      });
+    });
+
+    window.addEventListener("resize", updatePreview);
+    window.addEventListener("load", () => {
+      renderMilestoneInputsDom();
+      updatePreview();
+    });
+  </script>
+</body>
+</html>
